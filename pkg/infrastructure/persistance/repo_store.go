@@ -20,7 +20,7 @@ type RepoStore struct {
 func NewRepoStore() (*RepoStore, error) {
 	repoStore := RepoStore{}
 
-	mysqlURL := "administrator:canway@123@tcp(localhost:3306)/insight?parseTime=True"
+	mysqlURL := "administrator:canway#123@tcp(10.19.0.205:3306)/insight?parseTime=True"
 
 	gormDB, gormErr := gorm.Open(mysql.Open(mysqlURL), &gorm.Config{
 		Logger:               logger.Default.LogMode(logger.Silent),
@@ -34,6 +34,7 @@ func NewRepoStore() (*RepoStore, error) {
 	sqlDB.SetMaxIdleConns(100)
 	sqlDB.SetMaxOpenConns(10000)
 
+	repoStore.DB = gormDB
 	repoStore.VesselRepo = NewVesselRepo(gormDB)
 	repoStore.DeviceTypeRepo = NewDeviceTypeRepo(gormDB)
 	repoStore.DeviceRepo = NewDeviceRepo(gormDB)

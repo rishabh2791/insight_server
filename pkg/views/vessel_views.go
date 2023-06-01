@@ -1,13 +1,24 @@
 package views
 
-import "insight/pkg/application"
+import (
+	"insight/pkg/application"
+	"log"
+
+	"github.com/gin-gonic/gin"
+)
 
 type VesselViews struct {
-	Application application.Application
+	apps *application.Application
 }
 
-func NewVesselApp() *VesselViews {
-	vesselViews := VesselViews{}
+func NewVesselViews(apps *application.Application) *VesselViews {
+	views := VesselViews{}
 
-	return &vesselViews
+	views.apps = apps
+
+	return &views
+}
+
+func (view *VesselViews) Test(ctx *gin.Context) {
+	log.Println("Testing")
 }
