@@ -15,6 +15,7 @@ type Device struct {
 	Vessel                *Vessel     `json:"vessel"`
 	IsConstant            bool        `json:"is_constant" gorm:"default:false;"`
 	ConstantValue         float32     `json:"constant_value" gorm:"default:0.0;"`
+	Factor                int         `json:"factor" gorm:"default:1;"`
 	NodeAddress           int         `json:"node_address" gorm:"default:1;"`
 	AdditionalNodeAddress int         `json:"additional_node_address" gorm:"default:22;"` // Can be used as GPIO Pin if isConstant is true.
 	ReadStart             int         `json:"read_start" gorm:"default:0;"`
