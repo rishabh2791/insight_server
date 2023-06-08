@@ -27,6 +27,7 @@ type Device struct {
 	MessageLength         int         `json:"message_length" gorm:"default:16;"`
 	ClearBuffer           bool        `json:"clear_buffers_before_each_transaction" gorm:"default:True;"`
 	ClosePort             bool        `json:"close_port_after_each_call" gorm:"default:True;"`
+	CommunicationMethod   string      `json:"communication_method" gorm:"size:20;not null;default:'modbus'"` // Options between modbus, serial and constant (GPIO)
 }
 
 func (Device) Tablename() string {
@@ -47,6 +48,10 @@ func (model *Device) Validate() error {
 
 	if model.VesselID == "" || len(model.VesselID) == 0 {
 		errs += "Vessel Can Not be Empty.\n"
+	}
+
+	if model.CommunicationMethod == "" || len(model.CommunicationMethod) == 0 {
+		errs += "Communication Method Can Not be Empty.\n"
 	}
 
 	if len(errs) == 0 || errs == "" {
