@@ -13,6 +13,7 @@ type Device struct {
 	DeviceType            *DeviceType `json:"device_type"`
 	VesselID              string      `json:"vessel_id" gorm:"size:191;not null;"`
 	Vessel                *Vessel     `json:"vessel"`
+	Port                  string      `json:"port" gorm:"size:100;not null;default:'/dev/ttyAgitators'"`
 	IsConstant            bool        `json:"is_constant" gorm:"default:false;"`
 	ConstantValue         float32     `json:"constant_value" gorm:"default:0.0;"`
 	Factor                int         `json:"factor" gorm:"default:1;"`
